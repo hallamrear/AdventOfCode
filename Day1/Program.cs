@@ -8,16 +8,23 @@ namespace Day1
     {
         static void Main(string[] args)
         {
-            int numberOfDepthIncreases = 0;
+            int numberOfDepthIncreases = 0, numberOfDepthSlideIncreases = 0, slideSum = 0, previousSlideSum = 0;
             int[] data = Array.ConvertAll(File.ReadAllLines(@"Data.txt"), int.Parse);
 
             for(int i = 1; i < data.Length; i++)
             {
-                if(data[i] > data[i - 1])
-                    numberOfDepthIncreases++;
+                numberOfDepthIncreases += (data[i] > data[i - 1]) ? 1 : 0;
+
+                if (data.Length - i > 2)
+                {
+                    slideSum = data[i] + data[i + 1] + data[i + 2];
+                    numberOfDepthSlideIncreases += (slideSum > previousSlideSum) ? 1 : 0;
+                    previousSlideSum = slideSum;
+                }
             }
 
             Console.WriteLine("Depth increases: " + numberOfDepthIncreases);
+            Console.WriteLine("Depth slide increases: " + numberOfDepthSlideIncreases);
             Console.ReadLine();
         }
     }
