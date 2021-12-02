@@ -8,6 +8,8 @@ namespace Day2
         {
             int horizontal = 0;
             int depth = 0;
+            int aim = 0;
+
             string[] data = System.IO.File.ReadAllLines(@"Data.txt");
 
             foreach(string str in data)
@@ -19,12 +21,13 @@ namespace Day2
                 {
                     case "forward":
                         horizontal += amount;
+                        depth += aim * amount;
                         break;
                     case "up":
-                        depth -= amount;
+                        aim -= amount;
                         break;
                     case "down":
-                        depth += amount;
+                        aim += amount;
                         break;
                     default:
                         break;
